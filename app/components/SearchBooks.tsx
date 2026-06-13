@@ -14,7 +14,7 @@ export const SearchBooks = () => {
         type="text"
         name="q"
         id="searchBooks"
-        className="p-2 rounded w-full bg-white"
+        className="px-3 py-2 rounded w-full bg-white"
         placeholder="Search books..."
       />
 

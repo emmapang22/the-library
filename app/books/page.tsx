@@ -10,13 +10,12 @@ export default async function Books({ searchParams }: BooksProps) {
   const { q } = await searchParams;
 
   return (
-    <>
+    <div className="w-full flex flex-col items-center max-w-125 gap-4">
       <SearchBooks />
 
       <Suspense fallback={<>Loading books...</>}>
-        {q && <h1>Search results for '{q}'</h1>}
         <BooksResult query={q} />
       </Suspense>
-    </>
+    </div>
   );
 }
