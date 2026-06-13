@@ -15,6 +15,7 @@ export const SearchBooks = () => {
         name="q"
         id="searchBooks"
         className="p-2 rounded w-full bg-white"
+        placeholder="Search books..."
       />
 
       <Button buttonType={ButtonType.primary}>Sök</Button>
