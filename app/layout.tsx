@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import { Geist_Mono, Onest } from "next/font/google";
+import "./styles/globals.css";
 import { Header } from "./components/Header";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const onest = Onest({
+  variable: "--font-onest",
   subsets: ["latin"],
 });
 
@@ -26,12 +26,12 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${onest.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <Header />
-        <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-          <main className="flex flex-1 w-full max-w-3xl flex-col items-center py-32 px-4 md:px-16 bg-white dark:bg-black sm:items-start">
+        <div className="flex flex-col flex-1 items-center justify-center font-sans">
+          <main className="flex flex-1 w-full max-w-3xl flex-col items-center py-20 px-4 md:px-16">
             {children}
           </main>
         </div>
