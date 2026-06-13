@@ -19,7 +19,7 @@ export const Button = ({
   extraClasses,
 }: ButtonProps) => {
   let className =
-    "px-8 py-2 rounded transition ease-in-out duration-200 font-medium hover:cursor-pointer ";
+    "px-4 lg:px-8 py-2 rounded transition ease-in-out duration-200 font-medium hover:cursor-pointer ";
 
   if (extraClasses) {
     className += extraClasses;
