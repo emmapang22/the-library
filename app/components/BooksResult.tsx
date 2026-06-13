@@ -17,7 +17,7 @@ export const BooksResult = async ({ query }: BooksResultProps) => {
 
     if (!data.docs || data.docs.length === 0) {
       return (
-        <h1 className="text-center">
+        <h1 className="text-center h5">
           Could not find any books matching your search: "{query}"
         </h1>
       );
@@ -25,10 +25,13 @@ export const BooksResult = async ({ query }: BooksResultProps) => {
 
     return (
       <div className="flex flex-col gap-4 w-full mt-4">
-        <h1>Search results for "{query}"</h1>
+        <h1 className="h4 text-center">Search results for "{query}"</h1>
 
         {data.docs.map((b) => (
-          <div key={b.key} className="flex p-4 border gap-4">
+          <div
+            key={b.key}
+            className="flex p-4 bg-[#f7f7f7] border-2 border-[#b4b4b4] dark:border-[#6e6e6e] rounded gap-4 dark:bg-[#242424]"
+          >
             <BookCover
               cover_edition_key={b.cover_edition_key}
               title={b.title}
@@ -65,7 +68,7 @@ export const BooksResult = async ({ query }: BooksResultProps) => {
 
               <div className="mt-4 lg:self-end">
                 <Button
-                  buttonType={ButtonType.primary}
+                  buttonType={ButtonType.secondary}
                   extraClasses={" w-full lg:w-auto "}
                 >
                   Want to read

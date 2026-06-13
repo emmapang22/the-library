@@ -27,15 +27,15 @@ export const Button = ({
 
   switch (buttonType) {
     case ButtonType.primary:
-      className += " bg-slate-700 text-white hover:bg-slate-800";
+      className += " bg-primary-darker text-white hover:bg-primary";
       break;
 
     case ButtonType.secondary:
-      className += "";
+      className += " bg-secondary text-black hover:bg-secondary-darker";
       break;
 
     default:
-      className += "bg-gray-500 text-gray-900 hover:bg-gray-300";
+      className += " bg-gray-500 text-gray-900 hover:bg-gray-300";
   }
 
   return (

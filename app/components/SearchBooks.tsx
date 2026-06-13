@@ -5,7 +5,7 @@ export const SearchBooks = () => {
     <form
       method="GET"
       action={"/books"}
-      className="bg-blue-500 text-black flex flex-col md:flex-row gap-4 p-4 justify-center w-full rounded"
+      className="bg-primary-lighter text-black flex flex-col md:flex-row gap-4 p-5 justify-center w-full rounded-xl"
     >
       <label htmlFor="searchBooks" className="sr-only">
         Search books:
@@ -18,7 +18,7 @@ export const SearchBooks = () => {
         placeholder="Search books..."
       />
 
-      <Button buttonType={ButtonType.primary}>Sök</Button>
+      <Button buttonType={ButtonType.secondary}>Sök</Button>
     </form>
   );
 };
