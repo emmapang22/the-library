@@ -1,17 +1,9 @@
-import connectDB from "../lib/db";
-import { Book } from "../models/Book";
-import { BookModel } from "../models/BookModel";
+import { ReadingList } from "../components/ReadingList";
 
-export default async function ReadingList() {
-  await connectDB();
-
-  const savedBooks: Book[] = await BookModel.find();
-
+export default function ReadingListPage() {
   return (
-    <div>
-      {savedBooks.map((b) => (
-        <div key={b.key}>{b.title}</div>
-      ))}
+    <div className="w-full flex flex-col items-center max-w-125 gap-4">
+      <ReadingList />
     </div>
   );
 }
