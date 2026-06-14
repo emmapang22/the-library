@@ -12,3 +12,13 @@ export const addToReadingList = async (b: Book) => {
 
   revalidatePath("/reading-list");
 };
+
+export const removeBook = async (book: Book) => {
+  await connectDB();
+
+  const key = book.key;
+
+  await BookModel.deleteOne({ key });
+
+  revalidatePath("/reading-list");
+};
