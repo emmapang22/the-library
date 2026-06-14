@@ -3,7 +3,7 @@ import Image from "next/image";
 type BookCoverProps = {
   cover_edition_key?: string;
   title: string;
-  author_name: string[];
+  author_name?: string[];
 };
 
 export const BookCover = async ({
