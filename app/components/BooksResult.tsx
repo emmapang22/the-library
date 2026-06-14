@@ -42,7 +42,7 @@ export const BooksResult = async ({ query }: BooksResultProps) => {
           />
 
           <div className="flex flex-2 flex-col w-full justify-between">
-            <div className="flex flex-col">
+            <div>
               {b.series_name && (
                 <p className="font-bold text-sm">
                   {b.series_name.join(", ")}{" "}
@@ -56,17 +56,15 @@ export const BooksResult = async ({ query }: BooksResultProps) => {
 
               <h3 className="font-bold text-[16px] md:text-xl">{b.title}</h3>
 
-              <div className="flex flex-col gap-1">
-                <p className="text-sm">
-                  By {b.author_name?.join(", ") || "Unknown author"}
-                </p>
+              <p className="text-sm">
+                By {b.author_name?.join(", ") || "Unknown author"}
+              </p>
 
-                {b.first_publish_year ? (
-                  <p className="text-sm">Published: {b.first_publish_year}</p>
-                ) : (
-                  <p className="text-sm">Published: Unknown</p>
-                )}
-              </div>
+              {b.first_publish_year ? (
+                <p className="text-sm">Published: {b.first_publish_year}</p>
+              ) : (
+                <p className="text-sm">Published: Unknown</p>
+              )}
             </div>
 
             <WantToReadBtn book={b} />
