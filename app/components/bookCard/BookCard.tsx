@@ -37,9 +37,13 @@ export const BookCard = ({ b, buttonText, buttonFunction }: BookCardProps) => {
 
           <h3 className="font-bold text-[16px] md:text-xl">{b.title}</h3>
 
-          <p className="text-sm">
-            By {b.author_name?.join(", ") || "Unknown author"}
-          </p>
+          {b.author_name?.length === 2 ? (
+            <p className="text-sm">By {b.author_name?.join(" and ")}</p>
+          ) : (
+            <p className="text-sm">
+              By {b.author_name?.join(", ") || "Unknown author"}
+            </p>
+          )}
 
           {b.first_publish_year ? (
             <p className="text-sm">Published: {b.first_publish_year}</p>
