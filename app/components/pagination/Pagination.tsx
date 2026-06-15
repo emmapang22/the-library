@@ -14,7 +14,7 @@ export const Pagination = ({ numberOfBooks, q, page }: PaginationProps) => {
   return (
     <nav
       aria-label="Pagination"
-      className="flex items-center justify-center gap-4"
+      className="flex items-center justify-center gap-4 flex-wrap lg:flex-nowrap"
     >
       {page > 1 && (
         <button
