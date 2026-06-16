@@ -2,14 +2,16 @@ import { PageBtn } from "./PageBtn";
 
 type PaginationBtnContainerProps = {
   page: number;
-  q: string;
+  q?: string;
   numberOfPages: number;
+  isReadingList?: boolean;
 };
 
 export const PageNavigation = ({
   page,
   q,
   numberOfPages,
+  isReadingList,
 }: PaginationBtnContainerProps) => {
   if (numberOfPages === 1 || !numberOfPages) {
     return null;
@@ -19,7 +21,13 @@ export const PageNavigation = ({
     return (
       <>
         {Array.from({ length: numberOfPages }).map((_, i) => (
-          <PageBtn key={i + 1} page={i + 1} q={q} currentPage={page} />
+          <PageBtn
+            key={i + 1}
+            page={i + 1}
+            q={q}
+            currentPage={page}
+            isReadingList={isReadingList}
+          />
         ))}
       </>
     );
@@ -29,10 +37,16 @@ export const PageNavigation = ({
     return (
       <>
         {Array.from({ length: 5 }).map((_, i) => (
-          <PageBtn key={i} page={i + 1} q={q} currentPage={page} />
+          <PageBtn
+            key={i + 1}
+            page={i + 1}
+            q={q}
+            currentPage={page}
+            isReadingList={isReadingList}
+          />
         ))}
         <span aria-hidden="true">...</span>
-        <PageBtn page={numberOfPages} q={q} />
+        <PageBtn page={numberOfPages} q={q} isReadingList={isReadingList} />
       </>
     );
   }
@@ -40,15 +54,16 @@ export const PageNavigation = ({
   if (page > numberOfPages - 4 || page === numberOfPages) {
     return (
       <>
-        <PageBtn page={1} q={q} />
+        <PageBtn page={1} q={q} isReadingList={isReadingList} />
         <span aria-hidden="true">...</span>
 
         {Array.from({ length: 5 }).map((_, i) => (
           <PageBtn
-            key={i}
+            key={i + 1}
             page={numberOfPages - 4 + i}
             q={q}
             currentPage={page}
+            isReadingList={isReadingList}
           />
         ))}
       </>
@@ -57,15 +72,20 @@ export const PageNavigation = ({
 
   return (
     <>
-      <PageBtn page={1} q={q} />
+      <PageBtn page={1} q={q} isReadingList={isReadingList} />
       <span aria-hidden="true">...</span>
-      <PageBtn page={page - 2} q={q} />
-      <PageBtn page={page - 1} q={q} />
-      <PageBtn page={page} q={q} currentPage={page} />
-      <PageBtn page={page + 1} q={q} />
-      <PageBtn page={page + 2} q={q} />
+      <PageBtn page={page - 2} q={q} isReadingList={isReadingList} />
+      <PageBtn page={page - 1} q={q} isReadingList={isReadingList} />
+      <PageBtn
+        page={page}
+        q={q}
+        currentPage={page}
+        isReadingList={isReadingList}
+      />
+      <PageBtn page={page + 1} q={q} isReadingList={isReadingList} />
+      <PageBtn page={page + 2} q={q} isReadingList={isReadingList} />
       <span aria-hidden="true">...</span>
-      <PageBtn page={numberOfPages} q={q} />
+      <PageBtn page={numberOfPages} q={q} isReadingList={isReadingList} />
     </>
   );
 };

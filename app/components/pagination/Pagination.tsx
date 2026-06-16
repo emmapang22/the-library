@@ -1,15 +1,29 @@
-import Link from "next/link";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { PageNavigation } from "./PageNavigation";
+import { ArrowBtn } from "./ArrowBtn";
 
 type PaginationProps = {
   numberOfBooks: number;
-  q: string;
+  q?: string;
   page: number;
+  isReadingList?: boolean;
 };
 
-export const Pagination = ({ numberOfBooks, q, page }: PaginationProps) => {
+export const Pagination = ({
+  numberOfBooks,
+  q,
+  page,
+  isReadingList,
+}: PaginationProps) => {
   const numberOfPages = Math.ceil(Number(numberOfBooks) / 10);
+
+  const previousPageLink = isReadingList
+    ? `/reading-list?page=${page - 1}&limit=10`
+    : `/books?q=${q}&page=${page - 1}&limit=10`;
+
+  const nextPageLink = isReadingList
+    ? `/reading-list?page=${page + 1}&limit=10`
+    : `/books?q=${q}&page=${page + 1}&limit=10`;
 
   return (
     <nav
@@ -17,27 +31,26 @@ export const Pagination = ({ numberOfBooks, q, page }: PaginationProps) => {
       className="flex items-center justify-center gap-4 flex-wrap lg:flex-nowrap"
     >
       {page > 1 && (
-        <Link
-          className="bg-primary dark:bg-primary-lighter p-3 rounded-full hover:cursor-pointer hover:bg-secondary hover:text-black"
-          aria-label="Previous page"
+        <ArrowBtn
           title="Previous page"
-          href={`/books?q=${q}&page=${page - 1}&limit=10`}
-        >
-          <ArrowLeft className="size-4" strokeWidth={3} />
-        </Link>
+          href={previousPageLink}
+          icon={<ArrowLeft className="size-4" strokeWidth={3} />}
+        />
       )}
 
-      <PageNavigation page={page} q={q} numberOfPages={numberOfPages} />
+      <PageNavigation
+        page={page}
+        q={q}
+        numberOfPages={numberOfPages}
+        isReadingList={isReadingList}
+      />
 
       {page < numberOfPages && (
-        <Link
-          aria-label="Next page"
+        <ArrowBtn
           title="Next page"
-          className="bg-primary dark:bg-primary-lighter p-3 rounded-full hover:cursor-pointer hover:bg-secondary hover:text-black"
-          href={`/books?q=${q}&page=${page + 1}&limit=10`}
-        >
-          <ArrowRight className="size-4" strokeWidth={3} />
-        </Link>
+          href={nextPageLink}
+          icon={<ArrowRight className="size-4" strokeWidth={3} />}
+        />
       )}
     </nav>
   );
