@@ -17,16 +17,14 @@ export const Pagination = ({ numberOfBooks, q, page }: PaginationProps) => {
       className="flex items-center justify-center gap-4 flex-wrap lg:flex-nowrap"
     >
       {page > 1 && (
-        <button
+        <Link
           className="bg-primary dark:bg-primary-lighter p-3 rounded-full hover:cursor-pointer hover:bg-secondary hover:text-black"
           aria-label="Previous page"
           title="Previous page"
-          type="button"
+          href={`/books?q=${q}&page=${page - 1}&limit=10`}
         >
-          <Link href={`/books?q=${q}&page=${page - 1}&limit=10`}>
-            <ArrowLeft className="size-4" strokeWidth={3} />
-          </Link>
-        </button>
+          <ArrowLeft className="size-4" strokeWidth={3} />
+        </Link>
       )}
 
       <PaginationButtonsContainer
@@ -36,16 +34,14 @@ export const Pagination = ({ numberOfBooks, q, page }: PaginationProps) => {
       />
 
       {page < numberOfPages && (
-        <button
-          className="bg-primary dark:bg-primary-lighter p-3 rounded-full hover:cursor-pointer hover:bg-secondary hover:text-black"
+        <Link
           aria-label="Next page"
           title="Next page"
-          type="button"
+          className="bg-primary dark:bg-primary-lighter p-3 rounded-full hover:cursor-pointer hover:bg-secondary hover:text-black"
+          href={`/books?q=${q}&page=${page + 1}&limit=10`}
         >
-          <Link href={`/books?q=${q}&page=${page + 1}&limit=10`}>
-            <ArrowRight className="size-4" strokeWidth={3} />
-          </Link>
-        </button>
+          <ArrowRight className="size-4" strokeWidth={3} />
+        </Link>
       )}
     </nav>
   );

@@ -28,11 +28,9 @@ export const PaginationButtonsContainer = ({
   if (page < 5) {
     return (
       <>
-        <PaginationBtn page={1} q={q} currentPage={page} />
-        <PaginationBtn page={2} q={q} currentPage={page} />
-        <PaginationBtn page={3} q={q} currentPage={page} />
-        <PaginationBtn page={4} q={q} currentPage={page} />
-        <PaginationBtn page={5} q={q} currentPage={page} />
+        {Array.from({ length: 5 }).map((_, i) => (
+          <PaginationBtn key={i} page={i + 1} q={q} currentPage={page} />
+        ))}
         <span aria-hidden="true">...</span>
         <PaginationBtn page={numberOfPages} q={q} />
       </>
@@ -44,11 +42,15 @@ export const PaginationButtonsContainer = ({
       <>
         <PaginationBtn page={1} q={q} />
         <span aria-hidden="true">...</span>
-        <PaginationBtn page={numberOfPages - 4} q={q} currentPage={page} />
-        <PaginationBtn page={numberOfPages - 3} q={q} currentPage={page} />
-        <PaginationBtn page={numberOfPages - 2} q={q} currentPage={page} />
-        <PaginationBtn page={numberOfPages - 1} q={q} currentPage={page} />
-        <PaginationBtn page={numberOfPages} q={q} currentPage={page} />
+
+        {Array.from({ length: 5 }).map((_, i) => (
+          <PaginationBtn
+            key={i}
+            page={numberOfPages - 4 + i}
+            q={q}
+            currentPage={page}
+          />
+        ))}
       </>
     );
   }
