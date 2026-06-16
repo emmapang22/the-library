@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { PaginationButtonsContainer } from "./PaginationButtonsContainer";
+import { PageNavigation } from "./PageNavigation";
 
 type PaginationProps = {
   numberOfBooks: number;
@@ -27,11 +27,7 @@ export const Pagination = ({ numberOfBooks, q, page }: PaginationProps) => {
         </Link>
       )}
 
-      <PaginationButtonsContainer
-        page={page}
-        q={q}
-        numberOfPages={numberOfPages}
-      />
+      <PageNavigation page={page} q={q} numberOfPages={numberOfPages} />
 
       {page < numberOfPages && (
         <Link

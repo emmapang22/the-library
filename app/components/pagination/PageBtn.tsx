@@ -6,7 +6,7 @@ type PaginationBtnProps = {
   currentPage?: number;
 };
 
-export const PaginationBtn = ({ page, q, currentPage }: PaginationBtnProps) => {
+export const PageBtn = ({ page, q, currentPage }: PaginationBtnProps) => {
   const className =
     currentPage === page
       ? "p-4 py-2 text-sm rounded hover:cursor-pointer font-medium bg-secondary text-black"

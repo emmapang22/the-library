@@ -1,4 +1,4 @@
-import { PaginationBtn } from "./PaginationBtn";
+import { PageBtn } from "./PageBtn";
 
 type PaginationBtnContainerProps = {
   page: number;
@@ -6,7 +6,7 @@ type PaginationBtnContainerProps = {
   numberOfPages: number;
 };
 
-export const PaginationButtonsContainer = ({
+export const PageNavigation = ({
   page,
   q,
   numberOfPages,
@@ -19,7 +19,7 @@ export const PaginationButtonsContainer = ({
     return (
       <>
         {Array.from({ length: numberOfPages }).map((_, i) => (
-          <PaginationBtn key={i + 1} page={i + 1} q={q} currentPage={page} />
+          <PageBtn key={i + 1} page={i + 1} q={q} currentPage={page} />
         ))}
       </>
     );
@@ -29,10 +29,10 @@ export const PaginationButtonsContainer = ({
     return (
       <>
         {Array.from({ length: 5 }).map((_, i) => (
-          <PaginationBtn key={i} page={i + 1} q={q} currentPage={page} />
+          <PageBtn key={i} page={i + 1} q={q} currentPage={page} />
         ))}
         <span aria-hidden="true">...</span>
-        <PaginationBtn page={numberOfPages} q={q} />
+        <PageBtn page={numberOfPages} q={q} />
       </>
     );
   }
@@ -40,11 +40,11 @@ export const PaginationButtonsContainer = ({
   if (page > numberOfPages - 4 || page === numberOfPages) {
     return (
       <>
-        <PaginationBtn page={1} q={q} />
+        <PageBtn page={1} q={q} />
         <span aria-hidden="true">...</span>
 
         {Array.from({ length: 5 }).map((_, i) => (
-          <PaginationBtn
+          <PageBtn
             key={i}
             page={numberOfPages - 4 + i}
             q={q}
@@ -57,15 +57,15 @@ export const PaginationButtonsContainer = ({
 
   return (
     <>
-      <PaginationBtn page={1} q={q} />
+      <PageBtn page={1} q={q} />
       <span aria-hidden="true">...</span>
-      <PaginationBtn page={page - 2} q={q} />
-      <PaginationBtn page={page - 1} q={q} />
-      <PaginationBtn page={page} q={q} currentPage={page} />
-      <PaginationBtn page={page + 1} q={q} />
-      <PaginationBtn page={page + 2} q={q} />
+      <PageBtn page={page - 2} q={q} />
+      <PageBtn page={page - 1} q={q} />
+      <PageBtn page={page} q={q} currentPage={page} />
+      <PageBtn page={page + 1} q={q} />
+      <PageBtn page={page + 2} q={q} />
       <span aria-hidden="true">...</span>
-      <PaginationBtn page={numberOfPages} q={q} />
+      <PageBtn page={numberOfPages} q={q} />
     </>
   );
 };
