@@ -7,7 +7,7 @@ type BooksResultProps = {
   books: Book[];
 };
 
-export const BooksResult = async ({ query, books }: BooksResultProps) => {
+export const BooksResult = ({ query, books }: BooksResultProps) => {
   if (!books || books.length === 0) {
     return (
       <h1 className="text-center h5">

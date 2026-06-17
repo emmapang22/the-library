@@ -18,7 +18,7 @@ export const SearchBooks = () => {
         placeholder="Search books..."
       />
 
-      <Button buttonType={ButtonType.primary}>Sök</Button>
+      <Button buttonType={ButtonType.primary}>Search</Button>
     </form>
   );
 };

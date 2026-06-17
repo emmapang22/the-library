@@ -6,9 +6,15 @@ type BookCardProps = {
   b: Book;
   buttonText: string;
   buttonFunction: (book: Book) => Promise<void>;
+  isReadingList?: boolean;
 };
 
-export const BookCard = ({ b, buttonText, buttonFunction }: BookCardProps) => {
+export const BookCard = ({
+  b,
+  buttonText,
+  buttonFunction,
+  isReadingList,
+}: BookCardProps) => {
   return (
     <div
       key={b.key}
@@ -56,6 +62,7 @@ export const BookCard = ({ b, buttonText, buttonFunction }: BookCardProps) => {
           buttonText={buttonText}
           buttonFunction={buttonFunction}
           b={b}
+          isReadingList={isReadingList}
         />
       </div>
     </div>

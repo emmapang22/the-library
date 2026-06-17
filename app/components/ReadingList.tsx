@@ -4,9 +4,13 @@ import { Book } from "../models/Book";
 
 type ReadingListProps = {
   books: Book[];
+  isReadingList?: boolean;
 };
 
-export const ReadingList = async ({ books }: ReadingListProps) => {
+export const ReadingList = async ({
+  books,
+  isReadingList,
+}: ReadingListProps) => {
   return (
     <div className="flex flex-col gap-4 w-full">
       <h1 className="h1 text-center mb-6">My reading list</h1>
@@ -17,6 +21,7 @@ export const ReadingList = async ({ books }: ReadingListProps) => {
           b={b}
           buttonText="Remove book"
           buttonFunction={removeBook}
+          isReadingList={isReadingList}
         />
       ))}
     </div>

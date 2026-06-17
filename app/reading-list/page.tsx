@@ -1,23 +1,7 @@
-import { InferSchemaType } from "mongoose";
 import { Pagination } from "../components/pagination/Pagination";
 import { ReadingList } from "../components/ReadingList";
 import connectDB from "../lib/db";
-import { Book } from "../models/Book";
-import { BookModel, bookSchema } from "../models/BookModel";
-
-type BookFromDb = InferSchemaType<typeof bookSchema>;
-
-export const convertSavedBookToDto = (book: BookFromDb): Book => {
-  return {
-    key: book.key,
-    title: book.title,
-    author_name: book.author_name,
-    cover_edition_key: book.cover_edition_key || undefined,
-    first_publish_year: book.first_publish_year || undefined,
-    series_name: book.series_name,
-    series_position: book.series_position,
-  } satisfies Book;
-};
+import { BookModel } from "../models/BookModel";
 
 type ReadingListPageProps = {
   searchParams: Promise<{ page?: string; limit?: string }>;
@@ -32,17 +16,17 @@ export default async function ReadingListPage({
 
   await connectDB();
 
-  const savedBooks = await BookModel.find();
+  const savedBooks = await BookModel.find()
+    .skip((page - 1) * limit)
+    .limit(limit)
+    .lean();
 
-  const books: Book[] = savedBooks.map((book) => convertSavedBookToDto(book));
-
-  const totalBooks = books.length;
-  const startIndex = (page - 1) * limit;
-  const paginatedBooks = books.slice(startIndex, startIndex + limit);
+  const books = JSON.parse(JSON.stringify(savedBooks));
+  const totalBooks = await BookModel.countDocuments();
 
   return (
     <div className="w-full flex flex-col items-center max-w-125 gap-4">
-      <ReadingList books={paginatedBooks} />
+      <ReadingList books={books} isReadingList={true} />
       <Pagination numberOfBooks={totalBooks} page={page} isReadingList={true} />
     </div>
   );

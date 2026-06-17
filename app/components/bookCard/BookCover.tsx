@@ -6,7 +6,7 @@ type BookCoverProps = {
   author_name?: string[];
 };
 
-export const BookCover = async ({
+export const BookCover = ({
   cover_edition_key,
   title,
   author_name,
