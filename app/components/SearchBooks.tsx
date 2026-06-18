@@ -5,7 +5,7 @@ export const SearchBooks = () => {
     <form
       method="GET"
       action={"/books"}
-      className="bg-primary-lighter text-black flex flex-col md:flex-row gap-4 p-5 justify-center md:items-center w-full rounded-xl"
+      className="bg-primary-lighter text-black flex flex-col md:flex-row gap-4 p-5 justify-center md:items-center w-full md:w-11/12 lg:w-full rounded-xl"
     >
       <label htmlFor="searchBooks" className="sr-only">
         Search books:
