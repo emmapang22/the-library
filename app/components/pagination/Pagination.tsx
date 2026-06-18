@@ -7,6 +7,7 @@ type PaginationProps = {
   q?: string;
   page: number;
   isReadingList?: boolean;
+  limit?: number;
 };
 
 export const Pagination = ({
@@ -14,16 +15,17 @@ export const Pagination = ({
   q,
   page,
   isReadingList,
+  limit,
 }: PaginationProps) => {
   const numberOfPages = Math.ceil(Number(numberOfBooks) / 10);
 
   const previousPageLink = isReadingList
     ? `/reading-list?page=${page - 1}&limit=10`
-    : `/books?q=${q}&page=${page - 1}&limit=10`;
+    : `/books?q=${q}&page=${page - 1}&limit=${limit}`;
 
   const nextPageLink = isReadingList
     ? `/reading-list?page=${page + 1}&limit=10`
-    : `/books?q=${q}&page=${page + 1}&limit=10`;
+    : `/books?q=${q}&page=${page + 1}&limit=${limit}`;
 
   return (
     <nav
@@ -43,6 +45,7 @@ export const Pagination = ({
         q={q}
         numberOfPages={numberOfPages}
         isReadingList={isReadingList}
+        limit={limit}
       />
 
       {page < numberOfPages && (

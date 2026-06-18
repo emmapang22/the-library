@@ -6,19 +6,20 @@ import { OpenLibraryResponse } from "../models/OpenLibraryResponse";
 import { Pagination } from "../components/pagination/Pagination";
 
 type BooksProps = {
-  searchParams: Promise<{ q: string; page?: string }>;
+  searchParams: Promise<{ q: string; page?: string; limit?: string }>;
 };
 
 export default async function Books({ searchParams }: BooksProps) {
-  const { q, page: pageParam } = await searchParams;
+  const { q, page: pageParam, limit: limitParam } = await searchParams;
   const page = Number(pageParam) || 1;
+  const limit = Number(limitParam) || 10;
 
   let result: OpenLibraryResponse;
   let errorMessage = "";
 
   try {
     result = q
-      ? await searchBooks(q, page)
+      ? await searchBooks(q, page, limit)
       : ({
           numFound: 0,
           start: 0,
@@ -41,7 +42,7 @@ export default async function Books({ searchParams }: BooksProps) {
   console.log(result);
 
   return (
-    <div className="w-full flex flex-col items-center max-w-125 gap-4">
+    <div className="w-full flex flex-col items-center gap-4">
       <SearchBooks />
 
       {errorMessage && (
@@ -52,8 +53,15 @@ export default async function Books({ searchParams }: BooksProps) {
 
       {q && !errorMessage && (
         <Suspense fallback={<>Loading books...</>}>
-          <BooksResult query={q} books={result.docs} />
-          <Pagination numberOfBooks={result.numFound} q={q} page={page} />
+          <div className="w-full flex flex-col items-center max-w-125 gap-4">
+            <BooksResult query={q} books={result.docs} />
+            <Pagination
+              numberOfBooks={result.numFound}
+              q={q}
+              page={page}
+              limit={limit}
+            />
+          </div>
         </Suspense>
       )}
     </div>

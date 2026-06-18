@@ -5,6 +5,7 @@ type PaginationBtnProps = {
   q?: string;
   currentPage?: number;
   isReadingList?: boolean;
+  limit?: number;
 };
 
 export const PageBtn = ({
@@ -12,6 +13,7 @@ export const PageBtn = ({
   q,
   currentPage,
   isReadingList,
+  limit,
 }: PaginationBtnProps) => {
   const className =
     currentPage === page
@@ -22,7 +24,7 @@ export const PageBtn = ({
 
   const href = isReadingList
     ? `/reading-list?page=${page}&limit=10`
-    : `/books?q=${q}&page=${page}&limit=10`;
+    : `/books?q=${q}&page=${page}&limit=${limit}`;
 
   return (
     <Link aria-label={title} title={title} className={className} href={href}>
