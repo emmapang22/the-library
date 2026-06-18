@@ -52,17 +52,15 @@ export default async function Books({ searchParams }: BooksProps) {
       )}
 
       {q && !errorMessage && (
-        <Suspense fallback={<>Loading books...</>}>
-          <div className="w-full flex flex-col items-center max-w-125 gap-4">
-            <BooksResult query={q} books={result.docs} />
-            <Pagination
-              numberOfBooks={result.numFound}
-              q={q}
-              page={page}
-              limit={limit}
-            />
-          </div>
-        </Suspense>
+        <div className="w-full flex flex-col items-center max-w-125 gap-4">
+          <BooksResult query={q} books={result.docs} />
+          <Pagination
+            numberOfBooks={result.numFound}
+            q={q}
+            page={page}
+            limit={limit}
+          />
+        </div>
       )}
     </div>
   );
