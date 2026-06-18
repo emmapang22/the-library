@@ -6,24 +6,30 @@ import { Book } from "../models/Book";
 import { BookModel } from "../models/BookModel";
 
 export const addToReadingList = async (book: Book) => {
-  await connectDB();
+  try {
+    await connectDB();
 
-  const alreadyAdded = await BookModel.findOne({ key: book.key });
+    const alreadyAdded = await BookModel.findOne({ key: book.key });
 
-  if (alreadyAdded) {
-    console.log("You already added this book to your reading list");
-    return;
+    if (alreadyAdded) {
+      throw new Error("You already added this book to your reading list");
+    }
+
+    await BookModel.create(book);
+
+    revalidatePath("/reading-list");
+  } catch (error) {
+    throw new Error(`Could not add book to database: ${error}`);
   }
-
-  await BookModel.create(book);
-
-  revalidatePath("/reading-list");
 };
 
 export const removeBook = async (book: Book) => {
-  await connectDB();
+  try {
+    await connectDB();
+    await BookModel.deleteOne({ key: book.key });
 
-  await BookModel.deleteOne({ key: book.key });
-
-  revalidatePath("/reading-list");
+    revalidatePath("/reading-list");
+  } catch (error) {
+    throw new Error(`Could not remove book successfully: ${error}`);
+  }
 };

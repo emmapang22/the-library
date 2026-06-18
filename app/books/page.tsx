@@ -13,21 +13,44 @@ export default async function Books({ searchParams }: BooksProps) {
   const { q, page: pageParam } = await searchParams;
   const page = Number(pageParam) || 1;
 
-  const result = q
-    ? await searchBooks(q, page)
-    : ({
-        numFound: 0,
-        start: 0,
-        q: "",
-        docs: [],
-      } satisfies OpenLibraryResponse);
+  let result: OpenLibraryResponse;
+  let errorMessage = "";
+
+  try {
+    result = q
+      ? await searchBooks(q, page)
+      : ({
+          numFound: 0,
+          start: 0,
+          q: "",
+          docs: [],
+        } satisfies OpenLibraryResponse);
+  } catch (error) {
+    console.error("Error getting books:", error);
+    errorMessage =
+      "Failed to load books. Reload the page or enter another search term.";
+
+    result = {
+      numFound: 0,
+      start: 0,
+      q: "",
+      docs: [],
+    } satisfies OpenLibraryResponse;
+  }
 
   console.log(result);
 
   return (
     <div className="w-full flex flex-col items-center max-w-125 gap-4">
       <SearchBooks />
-      {q && (
+
+      {errorMessage && (
+        <div className="text-center">
+          <p>{errorMessage}</p>
+        </div>
+      )}
+
+      {q && !errorMessage && (
         <Suspense fallback={<>Loading books...</>}>
           <BooksResult query={q} books={result.docs} />
           <Pagination numberOfBooks={result.numFound} q={q} page={page} />
