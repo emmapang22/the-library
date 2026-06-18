@@ -16,14 +16,14 @@ export const BookCover = ({
     : `https://covers.openlibrary.org/b/olid/${cover_edition_key}.jpg`;
 
   return (
-    <div className="flex w-full max-w-25 relative aspect-2/3">
+    <div className="flex w-1/3 md:w-full max-w-28 relative aspect-2/3">
       <Image
         src={imageUrl}
         alt={`Book cover of "${title}" ${author_name ? ` by ${author_name}` : ""}`}
         fill={true}
         className="object-contain object-top"
         loading="eager"
-        sizes="100px"
+        sizes="112px"
       />
     </div>
   );

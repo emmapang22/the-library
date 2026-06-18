@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import { BooksResult } from "../components/BooksResult";
 import { SearchBooks } from "../components/SearchBooks";
 import { searchBooks } from "../lib/searchBooks";

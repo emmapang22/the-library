@@ -27,7 +27,7 @@ export const BookCard = ({
       />
 
       <div className="flex flex-2 flex-col w-full justify-between">
-        <div>
+        <div className="flex flex-col gap-1">
           {b.series_name && (
             <p className="font-bold text-sm">
               {b.series_name.join(", ")}{" "}
@@ -41,7 +41,9 @@ export const BookCard = ({
             </p>
           )}
 
-          <h3 className="font-bold text-[16px] md:text-xl">{b.title}</h3>
+          <h3 className="font-bold text-[16px] md:text-xl md:leading-6">
+            {b.title}
+          </h3>
 
           {b.author_name?.length === 2 ? (
             <p className="text-sm">By {b.author_name?.join(" and ")}</p>
