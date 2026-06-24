@@ -17,7 +17,9 @@ export const Pagination = ({
   isReadingList,
   limit,
 }: PaginationProps) => {
-  const numberOfPages = Math.ceil(Number(numberOfBooks) / 10);
+  const numberOfPages = limit
+    ? Math.ceil(Number(numberOfBooks) / limit)
+    : Math.ceil(Number(numberOfBooks) / 10);
 
   const previousPageLink = isReadingList
     ? `/reading-list?page=${page - 1}&limit=10`
